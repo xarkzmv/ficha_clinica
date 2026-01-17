@@ -1,12 +1,25 @@
-from flask import Flask, render_template, make_response, url_for # type: ignore
+from flask import Flask, render_template, make_response, url_for, redirect # type: ignore
 from weasyprint import HTML, CSS # type: ignore
+import stripe
 import os
 
 app = Flask(__name__)
+# Configurar la clave secreta. 
+app.config['STRIPE_API_KEY'] = os.environ.get('STRIPE_API_KEY')
+stripe.api_key = app.config['STRIPE_API_KEY']
+
 
 @app.route('/')
 def home():
-    return 'Servidor Flask Funcionando!'
+    return '''
+    <h1>Bienvenido al Sistema de Fichas</h1>
+    <p>Para descargar la ficha, debe realizar el pago de $5.000 CLP.</p>
+    <a href="/pagar">
+        <button style="padding:10px; background:blue; color:white; border:none; border-radius:5px; cursor:pointer;">
+            Pagar y Descargar Ficha
+        </button>
+    </a>
+    '''
 
 id_paciente = 1
 @app.route("/ficha/<int:id_paciente>")
@@ -49,6 +62,35 @@ def generar_ficha(id_paciente):
     response.headers['Content-Disposition'] = f'inline; filename=ficha_paciente_{id_paciente}.pdf'
 
     return response
+
+@app.route('/pagar')
+def pagar():
+    # Creamos una sesión de pago en Stripe
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency':'clp', # Moneda chilena
+                'product_data': {
+                    'name': 'Generación de Ficha Clínica',
+                },
+                'unit_amount': 5000,
+            },
+            'quantity':1,
+        }],
+        mode='payment',
+        # A donde redirigir si paga bien:
+        success_url=url_for('generar_ficha', id_paciente=1, _external=True),
+        # A donde redirigir si cancela:
+        cancel_url=url_for('home', _external=True), 
+    )
+
+    # Redirigimos al usuario a la pagina de pago de Strie
+    return redirect(session.url, code=303)
+
+
+
+
 
 # @app.route("/formulario")
 # def formulario ():
