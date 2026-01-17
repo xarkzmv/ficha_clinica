@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha Clínica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: inline-block;
+      width: 120px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+      width: 200px;
+      padding: 5px;
+    }
+    textarea {
+      width: 100%;
+      height: 60px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Ficha Clínica</h2>
+
+  <form>
+    <div class="form-group">
+      <label for="sexo">Sexo:</label>
+      <input type="text" id="sexo" name="sexo">
+    </div>
+
+    <div class="form-group">
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad">
+    </div>
+
+    <div class="form-group">
+      <label for="altura">Altura:</label>
+      <input type="text" id="altura" name="altura">
+    </div>
+
+    <div class="form-group">
+      <label for="peso">Peso:</label>
+      <input type="text" id="peso" name="peso">
+    </div>
+
+    <div class="form-group">
+      <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+    </div>
+
+    <div class="form-group">
+      <label for="oficio">Oficio:</label>
+      <input type="text" id="oficio" name="oficio">
+    </div>
+
+    <div class="form-group">
+      <label for="motivo_consulta">Motivo Consulta:</label>
+      <textarea id="motivo_consulta" name="motivo_consulta"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="diagnostico">Diagnóstico Médico:</label>
+      <textarea id="diagnostico" name="diagnostico"></textarea>
+    </div>
+  </form>
+
+</body>
+</html>

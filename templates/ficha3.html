@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha Clínica</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ficha Clínica</h1>
+    <h2>Paciente</h2>
+
+    <div class="section flex-col">
+        <div class="l">
+            <span class="label">Nombre:</span>
+            <span class="field">{{ paciente.nombre }}</span>
+        </div>
+        <div class="l">
+            <span class="label">RUT:</span>
+            <span class="field">{{ paciente.rut }}</span>
+        </div>
+        <div class="l">
+            <span class="label">Teléfono:</span>
+            <span class="field">{{ paciente.telefono }}</span>
+        </div>
+        <div class="l">
+            <span class="label">Fecha de atención:</span>
+            <span class="field">{{ paciente.fecha }}</span>
+        </div>
+    </div>
+
+    <div class="linea-flex wrap">
+        <label for="sexo">Sexo:</label>
+        <span class="field">{{ paciente.sexo }}</span>
+        <!-- <input type="text" id="sexo" name="sexo"> -->
+
+        <label for="edad">Edad:</label>
+        <span class="field">{{ paciente.edad }}</span>
+        <!-- <input type="number" id="edad" name="edad"> -->
+
+        <label for="altura">Altura:</label>
+        <span class="field">{{ paciente.altura }}</span>
+        <!-- <input type="text" id="altura" name="altura"> -->
+
+        <label for="peso">Peso:</label>
+        <span class="field">{{ paciente.peso }}</span>
+        <!-- <input type="text" id="peso" name="peso"> -->
+
+        <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+        <span class="field">{{ paciente.fecha_nac }}</span>
+        <!-- <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"> -->
+    </div>
+
+    <div class="linea-flex">
+        <label for="oficio">Oficio:</label>
+        <span class="field">{{ paciente.oficio }}</span>
+        
+        <!-- <input type="text" id="oficio" name="oficio" class="ancho-largo"> -->
+    </div>
+
+    <div class="linea-flex">
+        <label for="motivo">Motivo Consulta:</label>
+        <span class="field">{{ paciente.motivo }}</span>
+
+        <!-- <input type="text" id="motivo" name="motivo" class="ancho-largo"> -->
+    </div>
+
+    <div class="linea-flex">
+        <!-- <input type="text" class="ancho-largo"> -->
+    </div>
+
+    <div class="linea-flex">
+        <label for="diagnostico">Diagnóstico Médico:</label>
+        <!-- <input type="text" id="diagnostico" name="diagnostico" class="ancho-largo"> -->
+    </div>
+
+    <br>
+<!-- SECCION 2 -->
+<div class="check-section">
+    <h2>HISTORIA MÉDICA</h2>
+
+    <!-- 1. Enfermedades diagnosticadas -->
+    <div class="linea">
+    <strong>1. Enfermedades diagnosticadas:</strong><br>
+    {{ '☑' if paciente.circulatorio else '☐' }} Circulatorio
+    {{ '☑' if paciente.diabetes else '☐' }} Diabetes
+    {{ '☑' if paciente.hipertension else '☐' }} Hipertensión
+    {{ '☑' if paciente.hepatitis else '☐' }} Hepatitis<br>
+    {{ '☑' if paciente.cardiacos else '☐' }} Cardíacos
+    {{ '☑' if paciente.artritis else '☐' }} Artritis
+    {{ '☑' if paciente.tiroides else '☐' }} Tiroides
+    {{ '☑' if paciente.acv else '☐' }} ACV<br>
+    {{ '☑' if paciente.otra else '☐' }} Otra (especificar): {{ paciente.otra_enfermedad }} - Hace {{ paciente.otra_tiempo }}
+</div>
+
+    <!-- 2. Cirugías -->
+    <div class="linea">
+        <strong>2. Cirugías:</strong> {{ paciente.cirugias }}
+    </div>
+
+    <!-- 3. Alergias -->
+    <div class="linea">
+        <strong>3. Alergia a:</strong> {{ paciente.alergias }}
+    </div>
+
+    <!-- 4. Tratamientos -->
+    <div class="linea">
+        <strong>4. Tratamientos con medicamentos:</strong> {{ paciente.tratamientos }}
+    </div>
+
+    <!-- 5. Medicamentos sin receta -->
+    <div class="linea">
+        <strong>5. Medicamentos sin receta:</strong> {{ paciente.medicamentos_libres }}
+    </div>
+
+    <!-- 6. Alimentación -->
+    <div class="linea">
+        <strong>6. Su alimentación incluye:</strong><br>
+        <strong>Frutas:</strong> {{ '☑' if paciente.frutas == 'Si' else ('☒' if paciente.frutas == 'No' else ( 'Poco' if paciente.frutas == 'Poco' else '-')) }}
+        <strong>| Verduras:</strong> {{ '☑' if paciente.verduras == 'Si' else ('☒' if paciente.verduras == 'No' else ( 'Poco' if paciente.verduras == 'Poco' else '-')) }}
+        <strong>| Carne:</strong> 
+            {{ '☑' if paciente.carne_roja else '☐' }} Roja
+            {{ '☑' if paciente.carne_cerdo else '☐' }} Cerdo
+            {{ '☑' if paciente.carne_pollo else '☐' }} Pollo
+            {{ '☑' if paciente.carne_pescado else '☐' }} Pescado
+        <div>
+            <strong>Lácteos:</strong> 
+            {{ '☑' if paciente.lacteos_queso_amarillo else '☐' }} Queso amarillo
+            {{ '☑' if paciente.lacteos_queso_blanco else '☐' }} Queso blanco
+            {{ '☑' if paciente.lacteos_leche else '☐' }} Leche
+            {{ '☑' if paciente.lacteos_yogurt else '☐' }} Yogurt
+        </div>
+        <div>
+            <strong>* cuántas veces al día:</strong> 
+                {{ '☑' if paciente.lacteos_1vez else '☐' }} 1 vez
+                {{ '☑' if paciente.lacteos_2vez else '☐' }} 2 veces
+                {{ '☑' if paciente.lacteos_3masvez else '☐' }} + de 3 veces
+        </div>
+
+
+
+        <!-- Frutas: {{ '✓' if paciente.frutas == 'Si' else ('Poco' if paciente.frutas == 'Poco' else '') }}<br> -->
+        <!-- Verduras: {{ '✓' if paciente.verduras == 'Si' else ('Poco' if paciente.verduras == 'Poco' else '') }}<br> -->
+        <!-- Carne: Roja {{ '✓' if paciente.carne_roja else '' }}, Cerdo {{ '✓' if paciente.carne_cerdo else '' }}, Pollo {{ '✓' if paciente.carne_pollo else '' }}, Pescado {{ '✓' if paciente.carne_pescado else '' }}<br> -->
+        <!-- Lácteos: Queso Amarillo {{ '✓' if paciente.lacteo_amarillo else '' }}, Queso Blanco {{ '✓' if paciente.lacteo_blanco else '' }}, Leche {{ '✓' if paciente.leche else '' }}, Yogur {{ '✓' if paciente.yogur else '' }}<br> -->
+        <!-- Veces por día: {{ paciente.veces_dia }} -->
+    </div>
+
+    <!-- 7. Ingesta de agua -->
+    <div class="linea">
+        <strong>7. Ingesta de agua:</strong><br>
+            {{ '☑' if paciente.agua_si else '☐' }} Si
+            {{ '☑' if paciente.agua_no else '☐' }} No
+            {{ '☑' if paciente.agua_1vez else '☐' }} 1 
+            {{ '☑' if paciente.agua_2vez else '☐' }} 2 
+            {{ '☑' if paciente.agua_3masvez else '☐' }} + de 3 vasos
+    </div>
+
+    <div class="linea">
+        <strong>CABEZA, OJOS, OIDOS, NARIZ Y GARGANTA</strong><br>
+        {{ '☑' if paciente.zumbido_oidos else '☐' }} Zumbido de los oidos
+        {{ '☑' if paciente.fatiga_visual else '☐' }} Fatiga o cansancio visual
+        {{ '☑' if paciente.congestion_nasal else '☐' }} Congestión nasal
+        {{ '☑' if paciente.afonia else '☐' }} Afonía <br>
+        {{ '☑' if paciente.disfonia else '☐' }} Disfonía
+        {{ '☑' if paciente.falla_escuchar else '☐' }} Falla en el escuchar
+        {{ '☑' if paciente.vision_borrosa else '☐' }} Visión borrosa
+        {{ '☑' if paciente.migranas else '☐' }} Migrañas
+        {{ '☑' if paciente.flema else '☐' }} Flema <br>
+        {{ '☑' if paciente.rinorrea else '☐' }} Rinorrea
+        {{ '☑' if paciente.sinusitis else '☐' }} Sinusitis
+        {{ '☑' if paciente.rinitis else '☐' }} Rinitis
+        {{ '☑' if paciente.dolor_garganta else '☐' }} Dolor de garganta recurrente
+        {{ '☑' if paciente.estornudos else '☐' }} Estornudos
+    </div>
+
+    <div class="linea">
+        <strong> SISTEMA CARDIOVASCULAR Y RESPIRATORIO</strong><br>
+        {{ '☑' if paciente.varices else '☐' }} Várices
+        {{ '☑' if paciente.mareos else '☐' }} Mareos
+        {{ '☑' if paciente.dolor_suspiros else '☐' }} Dolor con suspiros
+        {{ '☑' if paciente.hipotension else '☐' }} Hipotensión
+        {{ '☑' if paciente.vertigo else '☐' }} Vértigo
+        {{ '☑' if paciente.asma else '☐' }} Asma <br>
+        {{ '☑' if paciente.palpitaciones else '☐' }} Palpitaciones
+        {{ '☑' if paciente.desmayo else '☐' }} Desmayo
+        {{ '☑' if paciente.tos_seca else '☐' }} Tos seca
+        {{ '☑' if paciente.arritmias else '☐' }} Arritmias
+        {{ '☑' if paciente.tos_sangre else '☐' }} Tos con sangre<br>
+        {{ '☑' if paciente.tos_flema else '☐' }} Tos con flema
+        {{ '☑' if paciente.manos_pies_frios else '☐' }} Manos y pies fríos
+        {{ '☑' if paciente.dificultad_respirar else '☐' }} Dificultad al respirar
+        {{ '☑' if paciente.apnea else '☐' }} Apnea
+    </div>
+
+    <div class="linea">
+        <strong> GASTROINTESTINAL </strong> <br>
+            {{ '☑' if paciente.estrenimiento else '☐' }} Estreñimiento
+            {{ '☑' if paciente.gases else '☐' }} Gases
+            {{ '☑' if paciente.diarrea else '☐' }} Diarrea
+            {{ '☑' if paciente.dolor_abdominal else '☐' }} Dolor abdominal
+            {{ '☑' if paciente.colon else '☐' }} Colon<br>
+            {{ '☑' if paciente.acidez else '☐' }} Acidez
+            {{ '☑' if paciente.falta_apetito else '☐' }} Falta de apetito
+            {{ '☑' if paciente.sangre_fecas else '☐' }} Sangre en las fecas
+            {{ '☑' if paciente.exceso_apetito else '☐' }} Exceso de apetito<br>
+            {{ '☑' if paciente.reflujo else '☐' }} Reflujo
+            {{ '☑' if paciente.anorexia else '☐' }} Anorexia
+            {{ '☑' if paciente.bulimia else '☐' }} Bulimia
+
+            <div class="linea">
+                <strong>Observaciones:</strong> <span class="field">{{ paciente.observaciones_gastrointestinal }}</span>
+            </div>
+
+    </div>
+
+    <div class="linea">
+        <strong>GENITO-URINARIO:</strong><br>
+        {{ '☑' if paciente.incontinencia_urinaria else '☐' }} Incontinencia urinaria
+        {{ '☑' if paciente.orina_frecuente else '☐' }} Orina frecuente
+        {{ '☑' if paciente.dolor_orinar else '☐' }} Dolor al orinar
+        {{ '☑' if paciente.poca_orina else '☐' }} Poca orina
+    </div>
+
+    <div class="linea">
+        <strong>Menstruación:</strong><br>
+        {{ '☑' if paciente.menstruacion_escasa else '☐' }} Escasa
+        {{ '☑' if paciente.menstruacion_abundante else '☐' }} Abundante
+        {{ '☑' if paciente.menstruacion_normal else '☐' }} Normal <br>
+        {{ '☑' if paciente.menstruacion_dolorosa else '☐' }} <strong>Dolorosa: </strong>
+        {{ '☑' if paciente.menstruacion_dolorosa_antes else '☐' }} Antes /
+        {{ '☑' if paciente.menstruacion_dolorosa_durante else '☐' }} Durante /
+        {{ '☑' if paciente.menstruacion_dolorosa_final else '☐' }} Final<br>
+        {{ '☑' if paciente.menstruacion_regular else '☐' }} Regular
+        {{ '☑' if paciente.menstruacion_irregular else '☐' }} Irregular
+        {{ '☑' if paciente.menstruacion_no_hay else '☐' }} No hay
+    </div>
+
+    <div class="linea">
+        <label for="menstruacion_cada_cuantos"><strong>Cada cuántos días:</strong></label> <span class="field">{{ paciente.menstruacion_cada_cuantos }}</span>
+        <label for="menstruacion_duracion"><strong>Duración del ciclo:</strong></label> <span class="field">{{ paciente.menstruacion_duracion }}</span>
+        <label for="sistema_anticonceptivo"><strong>Sistema Anticonceptivo:</strong></label> <span class="field">{{ paciente.sistema_anticonceptivo }}</span>
+        <label for="anticonceptivo_tiempo"><strong>Hace cuánto tiempo:</strong></label> <span class="field">{{ paciente.anticonceptivo_tiempo }}</span>
+    </div>
+
+    <div class="linea">
+        <strong>MUSCULOESQUELETICO:</strong><br>
+        {{ '☑' if paciente.dolor_cuello else '☐' }} Dolor de cuello
+        {{ '☑' if paciente.dolor_espalda else '☐' }} Dolor de espalda
+        {{ '☑' if paciente.dolor_munecas else '☐' }} Dolor de muñecas
+        {{ '☑' if paciente.paralisis else '☐' }} Parálisis <br>
+        {{ '☑' if paciente.distonias else '☐' }} Distonías
+        {{ '☑' if paciente.dolor_rodillas else '☐' }} Dolor de rodillas
+        {{ '☑' if paciente.dolor_hombro else '☐' }} Dolor de hombro
+        {{ '☑' if paciente.dolor_tobillos else '☐' }} Dolor de tobillos <br>
+        {{ '☑' if paciente.espasticidad else '☐' }} Espasticidad
+        {{ '☑' if paciente.perdida_movilidad_sup else '☐' }} Pérdida de movilidad extremidad superior
+        {{ '☑' if paciente.perdida_movilidad_inf else '☐' }} Pérdida de movilidad extremidad inferior
+        {{ '☑' if paciente.perdida_sensibilidad_sup else '☐' }} Pérdida de sensibilidad extremidad superior<br>
+        {{ '☑' if paciente.perdida_sensibilidad_inf else '☐' }} Pérdida de sensibilidad extremidad inferior<br>
+    </div>
+
+    <div class="linea">
+    <strong>NEUROPSICOLÓGICO:</strong><br>
+    {{ '☑' if paciente.irritabilidad else '☐' }} Irritabilidad
+    {{ '☑' if paciente.susceptible_estres else '☐' }} Fácilmente susceptible al estrés
+    {{ '☑' if paciente.falta_coordinacion else '☐' }} Falta de coordinación <br>
+    {{ '☑' if paciente.falta_animo else '☐' }} Falta de ánimo
+    {{ '☑' if paciente.ansiedad else '☐' }} Ansiedad
+    {{ '☑' if paciente.tics else '☐' }} Tics
+    {{ '☑' if paciente.rigidez else '☐' }} Rigidez
+    {{ '☑' if paciente.temblores else '☐' }} Temblores<br>
+    {{ '☑' if paciente.perdida_habla else '☐' }} Pérdida del habla
+    {{ '☑' if paciente.insomnio else '☐' }} Insomnio
+    {{ '☑' if paciente.perdida_memoria else '☐' }} Pérdida de memoria
+</div>
+
+<div class="linea">
+    <label><strong>Agregue otros problemas de salud que no estén incluidos en la lista:</strong></label><br>
+    <div class="block-field">{{ paciente.otros_neuropsicologico }}</div>
+</div>
+
+<div class="linea">
+    <strong>Historia Familiar:</strong><br>
+    Estado Civil:<br>
+    {{ '☑' if paciente.casado else '☐' }} Casado(a)
+    {{ '☑' if paciente.soltero else '☐' }} Soltero(a)
+    {{ '☑' if paciente.separado else '☐' }} Separado(a)
+    {{ '☑' if paciente.conviviente else '☐' }} Conviviente <br>
+    {{ '☑' if paciente.viudo else '☐' }} Viudo(a)
+    - Hace cuántos años? {{ paciente.cuantos_anios_estado_civil }}<br><br>
+
+    <strong>Hijos:</strong><br>
+    - Cuántos: {{ paciente.cantidad_hijos }}<br>
+    - Edades: {{ paciente.edades_hijos }}<br><br>
+
+    - Con quién vive actualmente?:<br>
+    <div class="block-field">{{ paciente.con_quien_vive }}</div><br>
+
+    - Tuvo pérdidas familiares? Hace cuánto tiempo?:<br>
+    <div class="block-field">{{ paciente.perdidas_familiares }}</div>
+</div>
+
+<div class="section">
+    <h2>Diagnóstico Medicina Tradicional China</h2>
+
+        <label><strong>Lengua:</strong></label>
+        <div class="block-field">{{ paciente.lengua }}</div><br>
+
+        <label><strong>Pulso:</strong></label>
+        <div class="block-field">{{ paciente.pulso }}</div><br>
+
+        <label><strong>5 Elementos:</strong></label>
+        <div class="block-field">{{ paciente.cinco_elementos }}</div><br>
+
+        <label><strong>Síndrome:</strong></label>
+        <div class="block-field">{{ paciente.sindrome }}</div><br>
+
+        <label><strong>Primer Tratamiento (Técnica y Puntos):</strong></label>
+        <div class="block-field">{{ paciente.primer_tratamiento }}</div><br>
+</div>
+
+{% for sesion in paciente.sesiones.values() %}
+<div class="sesion-mini">
+    <div class="fecha-num">{{ loop.index }}.- Fecha: {{ sesion.fecha }}</div>
+    <div class="campo">
+        <strong>Lengua:</strong> {{ sesion.lengua }}
+    </div>
+    <div class="campo">
+        <strong>Pulso:</strong> {{ sesion.pulso }}
+    </div>
+    <div class="campo">
+        <strong>Obs:</strong> {{ sesion.observaciones }}
+    </div>
+    <div class="campo">
+        <strong>Técnica y Puntos:</strong> {{ sesion.tecnica_y_puntos }}
+    </div>
+</div>
+{% endfor %}
+
+
+</div>
+
+</body>
+</html>

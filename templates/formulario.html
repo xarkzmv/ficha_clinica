@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha Clínica</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ficha Clínica</h1>
+    <h2>Centro de Terapias</h2>
+
+    <div class="section flex-col">
+        <div class="linea-flex">
+            <span class="label">Nombre:</span>
+            <span class="field">{{ paciente.nombre }}</span>
+        </div>
+        <div class="linea-flex">
+            <span class="label">RUT:</span>
+            <span class="field">{{ paciente.rut }}</span>
+        </div>
+        <div class="linea-flex">
+            <span class="label">Edad:</span>
+            <span class="field">{{ paciente.edad }}</span>
+        </div>
+        <div class="linea-flex">
+            <span class="label">Teléfono:</span>
+            <span class="field">{{ paciente.telefono }}</span>
+        </div>
+        <div class="linea-flex">
+            <span class="label">Fecha de atención:</span>
+            <span class="field">{{ paciente.fecha }}</span>
+        </div>
+    </div>
+
+    <div class="linea-flex wrap">
+        <label for="sexo">Sexo:</label>
+        <span class="field">{{ paciente.sexo }}</span>
+        <input type="text" id="sexo" name="sexo">
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad">
+
+        <label for="altura">Altura:</label>
+        <input type="text" id="altura" name="altura">
+
+        <label for="peso">Peso:</label>
+        <input type="text" id="peso" name="peso">
+
+        <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+    </div>
+
+    <div class="linea-flex">
+        <label for="oficio">Oficio:</label>
+        <input type="text" id="oficio" name="oficio" class="ancho-largo">
+    </div>
+
+    <div class="linea-flex">
+        <label for="motivo">Motivo Consulta:</label>
+        <input type="text" id="motivo" name="motivo" class="ancho-largo">
+    </div>
+
+    <div class="linea-flex">
+        <input type="text" class="ancho-largo">
+    </div>
+
+
+<div class="section">
+    <h2>Historia Médica</h2>
+
+    <!-- 1. Enfermedades diagnosticadas -->
+    <div class="linea-flex wrap">
+        <span>1. Enfermedades diagnosticadas:</span><br>
+        <label><input type="checkbox" name="enfermedades" value="1"> Circulatorio</label>
+        <label><input type="checkbox" name="enfermedades" value="Diabetes"> Diabetes</label>
+        <label><input type="checkbox" name="enfermedades" value="Hipertension"> Hipertensión</label>
+        <label><input type="checkbox" name="enfermedades" value="Hepatitis"> Hepatitis</label>
+        <label><input type="checkbox" name="enfermedades" value="Cardiacos"> Cardíacos</label>
+        <label><input type="checkbox" name="enfermedades" value="Artritis"> Artritis</label>
+        <label><input type="checkbox" name="enfermedades" value="Tiroides"> Tiroides</label>
+        <label><input type="checkbox" name="enfermedades" value="ACV"> ACV</label>
+        <label><input type="checkbox" name="enfermedades" value="Otra"> Otra (especificar):</label>
+        <input type="text" name="otra_enfermedad" placeholder="Especificar tipo y hace cuánto tiempo" class="ancho-largo">
+    </div>
+
+    <!-- 2. Cirugías -->
+    <div class="linea-flex">
+        <label for="cirugias">2. Cirugías:</label>
+        <input type="text" id="cirugias" name="cirugias" class="ancho-largo">
+    </div>
+
+    <!-- 3. Alergias -->
+    <div class="linea-flex">
+        <label for="alergias">3. Alergia a:</label>
+        <input type="text" id="alergias" name="alergias" class="ancho-largo">
+    </div>
+
+    <!-- 4. Tratamiento(s) con medicamentos -->
+    <div class="linea-flex">
+        <label for="tratamientos">4. Tratamiento(s) con medicamentos:</label>
+        <input type="text" id="tratamientos" name="tratamientos" class="ancho-largo">
+    </div>
+
+    <!-- 5. Medicamentos sin receta -->
+    <div class="linea-flex">
+        <label for="medicamentos_libres">5. ¿Qué otro tipo de medicamento usa sin receta médica?</label>
+        <input type="text" id="medicamentos_libres" name="medicamentos_libres" class="ancho-largo">
+    </div>
+
+    <!-- 6. Alimentación -->
+    <div class="linea-flex wrap">
+        <span>6. Su alimentación incluye:</span><br>
+        <label>Frutas <input type="checkbox" name="frutas" value="Si"> Sí <input type="checkbox" name="frutas" value="No"> No <input type="checkbox" name="frutas" value="Poco"> Poco</label><br>
+        <label>Verduras <input type="checkbox" name="verduras" value="Si"> Sí <input type="checkbox" name="verduras" value="No"> No <input type="checkbox" name="verduras" value="Poco"> Poco</label><br>
+        <label>Carne: <input type="checkbox" name="carne" value="Roja"> Roja <input type="checkbox" name="carne" value="Cerdo"> Cerdo <input type="checkbox" name="carne" value="Pollo"> Pollo <input type="checkbox" name="carne" value="Pescado"> Pescado</label><br>
+        <label>Lácteos: <input type="checkbox" name="lacteos" value="Queso_amarillo"> Queso amarillo <input type="checkbox" name="lacteos" value="Queso_blanco"> Queso blanco <input type="checkbox" name="lacteos" value="Leche"> Leche <input type="checkbox" name="lacteos" value="Yogur"> Yogur</label><br>
+        <label>Cuántas veces por día: <input type="checkbox" name="veces_dia" value="1"> 1 vez <input type="checkbox" name="veces_dia" value="2"> 2 veces <input type="checkbox" name="veces_dia" value="3+"> + de 3 veces</label>
+    </div>
+
+    <!-- 7. Ingesta de agua -->
+    <div class="linea-flex wrap">
+        <span>7. Ingesta de Agua:</span><br>
+        <label><input type="checkbox" name="agua" value="Si"> Sí</label>
+        <label><input type="checkbox" name="agua" value="No"> No</label>
+        <label><input type="checkbox" name="agua" value="1"> 1 vaso</label>
+        <label><input type="checkbox" name="agua" value="2"> 2 vasos</label>
+        <label><input type="checkbox" name="agua" value="3+"> + de 3 vasos</label>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="linea-flex">
+        <label for="diagnostico">Diagnóstico Médico:</label>
+        <input type="text" id="diagnostico" name="diagnostico" class="ancho-largo">
+    </div>
+
+    <div class="section">
+        <h2>Motivo de Consulta</h2>
+        <div class="block-field">{{ paciente.motivo }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Diagnóstico Energético</h2>
+        <div class="block-field">{{ paciente.diagnostico }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Tratamiento</h2>
+        <div class="block-field">{{ paciente.tratamiento }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Observaciones</h2>
+        <div class="block-field">{{ paciente.observaciones }}</div>
+    </div>
+
+    <div class="section" style="margin-top: 40px;">
+        <div class="linea-flex">
+            <span class="label">Terapeuta:</span>
+            <span class="field">{{ paciente.terapeuta }}</span>
+        </div>
+        <div class="linea-flex">
+            <span class="label">Firma:</span>
+            ________________________________
+        </div>
+    </div>
+</body>
+</html>

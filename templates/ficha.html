@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha Clínica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ficha Clínica</h1>
+    <h2>Centro de Terapias</h2>
+
+    <div class="section">
+        <div><span class="label">Nombre:</span> <span class="field">{{ paciente.nombre }}</span></div><br>
+        <div><span class="label">RUT:</span> <span class="field">{{ paciente.rut }}</span></div><br>
+        <div><span class="label">Edad:</span> <span class="field">{{ paciente.edad }}</span></div><br>
+        <div><span class="label">Teléfono:</span> <span class="field">{{ paciente.telefono }}</span></div><br>
+        <div><span class="label">Fecha de atención:</span> <span class="field">{{ paciente.fecha }}</span></div><br>
+    </div>
+
+    <div class="linea-flex">
+        <label for="sexo">Sexo:</label>
+        <span class="field"> {{paciente.sexo }}</span>
+        <input type="text" id="sexo" name="sexo">
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad">
+
+        <label for="altura">Altura:</label>
+        <input type="text" id="altura" name="altura">
+
+        <label for="peso">Peso:</label>
+        <input type="text" id="peso" name="peso">
+
+        <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+    </div>
+        
+        </div>
+    <div class="linea">
+        <label for="oficio">Oficio:</label>
+        <input type="text" id="oficio" name="oficio" class="ancho-largo">
+    </div>
+
+    <div class="linea">
+        <label for="motivo">Motivo Consulta:</label>
+        <input type="text" id="motivo" name="motivo" class="ancho-largo">
+    </div>
+
+    <div class="linea">
+        <input type="text" class="ancho-largo">
+    </div>
+
+    <div class="linea">
+        <label for="diagnostico">Diagnóstico Médico:</label>
+        <input type="text" id="diagnostico" name="diagnostico" class="ancho-largo">
+    </div>
+
+
+    <div class="section">
+        <h2>Motivo de Consulta</h2>
+        <div class="block-field">{{ paciente.motivo }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Diagnóstico Energético</h2>
+        <div class="block-field">{{ paciente.diagnostico }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Tratamiento</h2>
+        <div class="block-field">{{ paciente.tratamiento }}</div>
+    </div>
+
+    <div class="section">
+        <h2>Observaciones</h2>
+        <div class="block-field">{{ paciente.observaciones }}</div>
+    </div>
+
+    <div class="section" style="margin-top: 40px;">
+        <div><span class="label">Terapeuta:</span> <span class="field">{{ paciente.terapeuta }}</span></div><br>
+        <div><span class="label">Firma:</span> ________________________________</div>
+    </div>
+</body>
+</html>
